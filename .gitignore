@@ -34,3 +34,6 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+#remove debug files
+debug_shot_cuts.py
