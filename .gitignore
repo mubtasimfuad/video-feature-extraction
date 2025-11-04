@@ -1,0 +1,36 @@
+# # Video files (too large for Git)
+# videos/*.mp4
+# videos/*.avi
+# videos/*.mov
+
+# # Output files
+# output/*.json
+# output/*.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
