@@ -8,7 +8,7 @@
         "height": 1920,
         "resolution": "1080x1920",
         "duration_seconds": 5.9,
-        "analyzed_at": "2025-11-04 23:13:01"
+        "analyzed_at": "2025-11-05 09:22:59"
     },
     "shot_cuts": {
         "total_cuts": 20,
@@ -116,5 +116,11 @@
         ],
         "processed_frames": 177,
         "threshold_used": 0.1
+    },
+    "motion_analysis": {
+        "average_motion": 4.8472,
+        "max_motion": 18.9787,
+        "min_motion": 0.1283,
+        "frames_analyzed": 35
     }
 }

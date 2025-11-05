@@ -8,7 +8,7 @@
         "height": 240,
         "resolution": "426x240",
         "duration_seconds": 4.0,
-        "analyzed_at": "2025-11-04 23:13:02"
+        "analyzed_at": "2025-11-05 09:23:28"
     },
     "shot_cuts": {
         "total_cuts": 8,
@@ -56,5 +56,11 @@
         ],
         "processed_frames": 120,
         "threshold_used": 0.1
+    },
+    "motion_analysis": {
+        "average_motion": 6.9866,
+        "max_motion": 9.4178,
+        "min_motion": 3.6356,
+        "frames_analyzed": 23
     }
 }
