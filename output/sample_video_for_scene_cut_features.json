@@ -8,7 +8,7 @@
         "height": 1920,
         "resolution": "1080x1920",
         "duration_seconds": 5.9,
-        "analyzed_at": "2025-11-05 09:22:59"
+        "analyzed_at": "2025-11-05 11:15:37"
     },
     "shot_cuts": {
         "total_cuts": 20,
@@ -122,5 +122,16 @@
         "max_motion": 18.9787,
         "min_motion": 0.1283,
         "frames_analyzed": 35
+    },
+    "text_detection": {
+        "text_present_ratio": 0.0286,
+        "frames_with_text": 1,
+        "frames_checked": 35,
+        "unique_words_found": [
+            "Dura",
+            "mic"
+        ],
+        "total_unique_words": 2,
+        "sample_rate_used": 5
     }
 }

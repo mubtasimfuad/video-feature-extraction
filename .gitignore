@@ -37,3 +37,4 @@ Thumbs.db
 
 #remove debug files
 debug_shot_cuts.py
+debug_ocr.py

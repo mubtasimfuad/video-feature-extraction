@@ -3,6 +3,9 @@ import json
 import os
 from datetime import datetime
 import numpy as np
+import pytesseract
+from PIL import Image
+
 
 def get_video_info(video_path):
     """Extract basic video information using OpenCV."""
@@ -189,6 +192,95 @@ def analyze_motion(video_path, sample_rate=5):
     }
 
 
+def detect_text(video_path, sample_rate=None):
+    """
+    Detect text in video using OCR with adaptive sampling.
+    video_path: Path to the video file
+    sample_rate: Process every Nth frame (None = auto-calculate)
+    """
+
+    print(f"  Detecting text...")
+
+    cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        raise ValueError(f"Cannot open video file: {video_path}")
+
+    # Auto-calculate sample rate based on video duration
+    if sample_rate is None:
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        duration = frame_count / fps if fps > 0 else 0
+        
+        # Adaptive: Higher sample rate (less frequent) for better quality
+        if duration < 10:
+            sample_rate = 15  # Every 15 frames for short videos
+        elif duration < 30:
+            sample_rate = 20  # Every 20 frames for medium videos
+        else:
+            sample_rate = 30  # Every 30 frames for long videos
+
+    # Get video resolution for adaptive thresholds
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    is_low_res = (width * height) < 500000
+    
+    min_confidence = 30 if is_low_res else 40
+    min_words = 1 if is_low_res else 2
+
+    frames_with_text = 0
+    total_frames_checked = 0
+    all_text_found = []
+    frame_number = 0
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        frame_number += 1
+
+        if frame_number % sample_rate != 0:
+            continue
+
+        total_frames_checked += 1
+
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        pil_image = Image.fromarray(rgb_frame)
+
+        ocr_data = pytesseract.image_to_data(pil_image, output_type=pytesseract.Output.DICT)
+        
+        frame_words = []
+        for i, word in enumerate(ocr_data['text']):
+            if word.strip():
+                conf = int(ocr_data['conf'][i])
+                word_clean = word.strip()
+                
+                if (len(word_clean) >= 3 and
+                    conf > min_confidence and
+                    word_clean.replace('#', '').replace('-', '').isalpha()):
+                    frame_words.append(word_clean)
+        
+        if len(frame_words) >= min_words:
+            frames_with_text += 1
+            all_text_found.extend(frame_words)
+
+    cap.release()
+
+    text_ratio = frames_with_text / total_frames_checked if total_frames_checked > 0 else 0
+    unique_words = list(set(all_text_found))
+
+    print(f"Text present in {frames_with_text}/{total_frames_checked} frames ({text_ratio:.2%})")
+
+    return {
+        "text_present_ratio": round(text_ratio, 4),
+        "frames_with_text": frames_with_text,
+        "frames_checked": total_frames_checked,
+        "unique_words_found": sorted(unique_words)[:20],
+        "total_unique_words": len(unique_words),
+        "sample_rate_used": sample_rate
+    }
+
+
 def main():
     video_files = [
         "videos/sample_video_for_motion.mp4",
@@ -212,11 +304,15 @@ def main():
             # Analyze motion
             motion_result = analyze_motion(video_path, sample_rate=5)
 
+            # Detect text
+            text_result = detect_text(video_path, sample_rate=5)
+
             # Combine all features
             features = {
                 "video_info": info,
                 "shot_cuts": cuts_result,
                 "motion_analysis": motion_result,
+                "text_detection": text_result,
             }
 
             # Save to JSON

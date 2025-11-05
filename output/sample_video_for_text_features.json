@@ -2,65 +2,62 @@
     "video_info": {
         "filename": "sample_video_for_text.mp4",
         "filepath": "videos/sample_video_for_text.mp4",
-        "fps": 29.97,
-        "frame_count": 120,
-        "width": 426,
-        "height": 240,
-        "resolution": "426x240",
-        "duration_seconds": 4.0,
-        "analyzed_at": "2025-11-05 09:23:28"
+        "fps": 25.0,
+        "frame_count": 935,
+        "width": 960,
+        "height": 506,
+        "resolution": "960x506",
+        "duration_seconds": 37.4,
+        "analyzed_at": "2025-11-05 11:16:27"
     },
     "shot_cuts": {
-        "total_cuts": 8,
+        "total_cuts": 3,
         "cuts": [
             {
-                "frame": 35,
-                "time_seconds": 1.17,
-                "difference": 0.169
+                "frame": 26,
+                "time_seconds": 1.04,
+                "difference": 0.967
             },
             {
-                "frame": 36,
-                "time_seconds": 1.2,
-                "difference": 0.133
+                "frame": 675,
+                "time_seconds": 27.0,
+                "difference": 0.902
             },
             {
-                "frame": 43,
-                "time_seconds": 1.43,
-                "difference": 0.157
-            },
-            {
-                "frame": 45,
-                "time_seconds": 1.5,
-                "difference": 0.207
-            },
-            {
-                "frame": 46,
-                "time_seconds": 1.53,
-                "difference": 0.235
-            },
-            {
-                "frame": 47,
-                "time_seconds": 1.57,
-                "difference": 0.163
-            },
-            {
-                "frame": 48,
-                "time_seconds": 1.6,
-                "difference": 0.291
-            },
-            {
-                "frame": 50,
-                "time_seconds": 1.67,
-                "difference": 0.101
+                "frame": 676,
+                "time_seconds": 27.04,
+                "difference": 0.114
             }
         ],
-        "processed_frames": 120,
+        "processed_frames": 935,
         "threshold_used": 0.1
     },
     "motion_analysis": {
-        "average_motion": 6.9866,
-        "max_motion": 9.4178,
-        "min_motion": 3.6356,
-        "frames_analyzed": 23
+        "average_motion": 1.3723,
+        "max_motion": 9.5385,
+        "min_motion": 0.2439,
+        "frames_analyzed": 186
+    },
+    "text_detection": {
+        "text_present_ratio": 0.2513,
+        "frames_with_text": 47,
+        "frames_checked": 187,
+        "unique_words_found": [
+            "#BLACK",
+            "#BLAGK",
+            "#OLACK",
+            "BLACK",
+            "FOLACK",
+            "HRLACK",
+            "ITER",
+            "IVES",
+            "LIVES",
+            "MATTE",
+            "MATTER",
+            "WATTER",
+            "all"
+        ],
+        "total_unique_words": 13,
+        "sample_rate_used": 5
     }
 }
